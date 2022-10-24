@@ -15,4 +15,7 @@ let smallShip = Ship(2)
 testBoard.placeShip(cords, smallShip )
 testBoard.placeShip(cords2, smallShip )
 console.log(testBoard.board)
-smallShip.hit(4)
+
+
+// testBoard.receiveAttack(cords)
+// console.log(testBoard.board)

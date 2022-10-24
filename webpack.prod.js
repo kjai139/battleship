@@ -28,11 +28,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/index.html'
         }),
-        // new CopyPlugin({
-        //     'patterns':[
-        //         // {from:'./src/svgs', to:'svgs'}
-        //     ]
-        // })
+        new CopyPlugin({
+            'patterns':[
+                {from:'./src/svgs', to:'svgs'}
+            ]
+        })
     ]
  }
  

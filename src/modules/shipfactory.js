@@ -6,6 +6,7 @@ function Ship(len, dmgTaken=0, sunk=false){
     ship.sunk = sunk
 
     ship.hit = (num = 1) => {
+        console.log(`${ship} has been hit!`)
         return ship.dmgTaken += num
     }
 
