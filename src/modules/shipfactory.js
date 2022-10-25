@@ -12,8 +12,10 @@ function Ship(len, dmgTaken=0, sunk=false){
 
     ship.isSunk = () => {
         if (ship.dmgTaken >= ship.length){
+            console.log(`${ship} has sunk!`)
             return ship.sunk = true
         } else {
+            console.log(`ship dmg: ${ship.dmgTaken}/${ship.length}`)
             return ship.sunk = false
         }
     }

@@ -55,3 +55,16 @@ html, body {
     font-family: var(--openSans);
     font-size: 40px;
 }
+
+.boardContainer {
+    display:grid;
+    grid-template-columns: repeat(10, 1fr);
+}
+
+.boardBlocks {
+    width: 30px;
+    height:30px;
+    border: 1px solid black;
+   
+    
+}

@@ -4,10 +4,6 @@ function Gameboard() {
     board.board = []
     board.createBoard = () => {
         let x = 10
-        
-
-        
-
 
         for (let i = 0; i< x; i++) {
             let row = []
@@ -29,6 +25,8 @@ function Gameboard() {
     board.receiveAttack = (cords) => {
         if (board.board[cords[0]][cords[1]] != 0){
             board.board[cords[0]][cords[1]].hit()
+            board.board[cords[0]][cords[1]].isSunk()
+            console.log(board.board)
             
         } else if (board.board[cords[0]][cords[1]] == 0) {
             console.log('attack missed')
@@ -38,5 +36,7 @@ function Gameboard() {
 
     return board
 }
+
+
 
 export { Gameboard }
