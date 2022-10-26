@@ -68,3 +68,31 @@ html, body {
    
     
 }
+
+#gameBoardDiv {
+    display: flex;
+    gap: 100px;
+}
+
+.unchecked:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
+.markHit {
+    background-image: url("./svgs/markHit.svg");
+    background-size: contain;
+    
+    
+    object-fit: fill;
+}
+
+.markHit:disabled, .markMiss:disabled {
+    cursor: not-allowed;
+}
+
+.markMiss {
+    background-image: url("./svgs/markMiss.svg");
+    background-size: contain;
+    object-fit: fill;
+}

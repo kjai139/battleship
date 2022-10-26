@@ -27,9 +27,11 @@ function Gameboard() {
             board.board[cords[0]][cords[1]].hit()
             board.board[cords[0]][cords[1]].isSunk()
             console.log(board.board)
+            return true
             
         } else if (board.board[cords[0]][cords[1]] == 0) {
             console.log('attack missed')
+            return false
         }
     }
 

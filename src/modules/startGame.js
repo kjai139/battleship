@@ -5,27 +5,17 @@ const startGame = () => {
     let screenDiv = document.querySelector('#screenDiv')
     screenDiv.textContent = ''
 
-    let testBoard = Gameboard()
-    testBoard.createBoard()
-    console.log(testBoard.board, 'before')
+    let gameBoardDiv = document.createElement('div')
+    gameBoardDiv.setAttribute('id', 'gameBoardDiv')
+    screenDiv.appendChild(gameBoardDiv)
 
-
-
-    let cords = [3,0]
-    let cords2 = [4, 6]
-    let smallShip = Ship(2)
-
-    testBoard.placeShip(cords, smallShip )
-    testBoard.placeShip(cords2, smallShip )
-    console.log(testBoard.board)
-
-    displayBoards(testBoard)
+    createGame()
 
 }
 
 
 const displayBoards = (board) => {
-    let screenDiv = document.querySelector('#screenDiv')
+    let gameBoardDiv = document.querySelector('#gameBoardDiv')
     let boardContainer = document.createElement('div')
     boardContainer.classList.add('boardContainer')
     let x = 10
@@ -34,9 +24,21 @@ const displayBoards = (board) => {
         for (let i = 0; i< x; i++) {
             let blocks = document.createElement('button')
             blocks.classList.add('boardBlocks')
+            blocks.classList.add('unchecked')
             blocks.setAttribute('id', `${board}-${i}-${rows}`)
 
-            blocks.addEventListener('click', () => board.receiveAttack(getCords(blocks)))
+            blocks.addEventListener('click', () => {
+                
+                if (board.receiveAttack(getCords(blocks)) == true) {
+                    blocks.classList.remove('unchecked')
+                    blocks.classList.add('markHit')
+                    blocks.disabled = true
+                } else {
+                    blocks.classList.remove('unchecked')
+                    blocks.classList.add('markMiss')
+                    blocks.disabled = true
+                }
+            })
 
             boardContainer.appendChild(blocks)
 
@@ -46,9 +48,11 @@ const displayBoards = (board) => {
         }
         rows += 1
     }
-    screenDiv.appendChild(boardContainer)
+    gameBoardDiv.appendChild(boardContainer)
     
 }
+
+
 
 
 const getCords = (event) => {
@@ -57,6 +61,39 @@ const getCords = (event) => {
     console.log(cord)
     return cord
     
+}
+
+const createGame = () => {
+    let p1Board = Gameboard()
+    p1Board.createBoard()
+    // console.log(p1Board, 'p1b4')
+
+    let p2Board = Gameboard()
+    p2Board.createBoard()
+    // console.log(p2Board, 'p2b4' )
+
+
+    //p1ships
+    let smallShip1 = Ship(2) 
+    let smallShip2 = Ship(2)
+
+
+    
+    p1Board.placeShip([3, 1], smallShip1)
+    p1Board.placeShip([3, 2], smallShip1)
+
+    p1Board.placeShip([0, 0], smallShip2)
+    p1Board.placeShip([0, 1], smallShip2)
+    
+    
+
+    //p2ships
+
+    let p2sub1 = Ship(2)
+
+    p2Board.placeShip([0,0], p2sub1)
+    displayBoards(p1Board)
+    displayBoards(p2Board)
 }
 
 
