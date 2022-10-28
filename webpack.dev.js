@@ -30,7 +30,8 @@ module.exports = {
         }),
         new CopyPlugin({
             'patterns':[
-                {from:'./src/svgs', to:'svgs'}
+                {from:'./src/svgs', to:'svgs'},
+                {from:'./src/imgs', to:'imgs'}
             ]
         })
     ]

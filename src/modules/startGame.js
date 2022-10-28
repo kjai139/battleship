@@ -2,6 +2,7 @@ import { Gameboard } from "./gameboard"
 import { dealDmg } from "./gameFunctions"
 import { currentTurn } from "./global"
 import { Ship } from "./shipfactory"
+import { placeShipUi } from "./shipPlacements"
 
 const startGame = () => {
     let screenDiv = document.querySelector('#screenDiv')
@@ -92,7 +93,10 @@ const createGame = () => {
     let p2Board = Gameboard('npcBoard')
     p2Board.createBoard()
     
-
+    placeShipUi()
+    displayBoards(p1Board)
+    displayScoreBoard()
+    displayBoards(p2Board)
 
     //p1ships
     let smallShip1 = Ship(2) 
@@ -114,9 +118,7 @@ const createGame = () => {
 
     p2Board.placeShip([0,0], p2sub1)
     p2Board.placeShip([1,0], p2sub1)
-    displayBoards(p1Board)
-    displayScoreBoard()
-    displayBoards(p2Board)
+    
 }
 
 
