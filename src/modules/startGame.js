@@ -1,4 +1,6 @@
 import { Gameboard } from "./gameboard"
+import { dealDmg } from "./gameFunctions"
+import { currentTurn } from "./global"
 import { Ship } from "./shipfactory"
 
 const startGame = () => {
@@ -18,6 +20,7 @@ const displayBoards = (board) => {
     let gameBoardDiv = document.querySelector('#gameBoardDiv')
     let boardContainer = document.createElement('div')
     boardContainer.classList.add('boardContainer')
+    boardContainer.setAttribute('id', `${board.name}`)
     let x = 10
     let rows = 0
     while (rows < 10) {
@@ -25,19 +28,11 @@ const displayBoards = (board) => {
             let blocks = document.createElement('button')
             blocks.classList.add('boardBlocks')
             blocks.classList.add('unchecked')
-            blocks.setAttribute('id', `${board}-${i}-${rows}`)
+            blocks.setAttribute('id', `${board.name}-${i}-${rows}`)
 
             blocks.addEventListener('click', () => {
                 
-                if (board.receiveAttack(getCords(blocks)) == true) {
-                    blocks.classList.remove('unchecked')
-                    blocks.classList.add('markHit')
-                    blocks.disabled = true
-                } else {
-                    blocks.classList.remove('unchecked')
-                    blocks.classList.add('markMiss')
-                    blocks.disabled = true
-                }
+                dealDmg(board, blocks)
             })
 
             boardContainer.appendChild(blocks)
@@ -52,25 +47,51 @@ const displayBoards = (board) => {
     
 }
 
+const displayScoreBoard = () => {
+    const gameBoardDiv = document.querySelector('#gameBoardDiv')
+    const scoreDiv = document.createElement('div')
+    scoreDiv.setAttribute('id', 'scoreDiv')
+
+    const arrowDiv1 = document.createElement('div')
+    const arrowImg = document.createElement('img')
+    arrowImg.setAttribute('id', 'playerArrow')
+    arrowImg.setAttribute('src', './svgs/right_arrow.svg')
+    arrowDiv1.appendChild(arrowImg)
+
+    const turnTxtDiv = document.createElement('div')
+    const turnTxt = document.createElement('p')
+    turnTxt.classList.add('uiTxt')
+    turnTxt.textContent = `${currentTurn}'s turn`
+    turnTxtDiv.appendChild(turnTxt)
+
+    const arrowDiv2 = document.createElement('div')
+    const arrowImg2 = document.createElement('img')
+    arrowImg2.setAttribute('id', 'npcArrow')
+    arrowImg2.setAttribute('src', './svgs/left_arrow.svg')
+    arrowDiv2.appendChild(arrowImg2)
+
+    scoreDiv.appendChild(arrowDiv1)
+    scoreDiv.appendChild(turnTxtDiv)
+    scoreDiv.appendChild(arrowDiv2)
+
+    gameBoardDiv.appendChild(scoreDiv)
 
 
-
-const getCords = (event) => {
-    let cordStr = event.id.split('-')
-    let cord = [Number(cordStr[1]),Number(cordStr[2])]
-    console.log(cord)
-    return cord
-    
 }
 
-const createGame = () => {
-    let p1Board = Gameboard()
-    p1Board.createBoard()
-    // console.log(p1Board, 'p1b4')
 
-    let p2Board = Gameboard()
+
+
+
+
+const createGame = () => {
+    let p1Board = Gameboard('playerBoard')
+    p1Board.createBoard()
+    
+
+    let p2Board = Gameboard('npcBoard')
     p2Board.createBoard()
-    // console.log(p2Board, 'p2b4' )
+    
 
 
     //p1ships
@@ -92,7 +113,9 @@ const createGame = () => {
     let p2sub1 = Ship(2)
 
     p2Board.placeShip([0,0], p2sub1)
+    p2Board.placeShip([1,0], p2sub1)
     displayBoards(p1Board)
+    displayScoreBoard()
     displayBoards(p2Board)
 }
 

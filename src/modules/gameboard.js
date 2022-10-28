@@ -1,7 +1,8 @@
 import { Ship } from "./shipfactory"
-function Gameboard() {
+function Gameboard(name = '') {
     const board = {}
     board.board = []
+    board.name = name
     board.createBoard = () => {
         let x = 10
 
