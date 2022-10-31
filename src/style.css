@@ -1,6 +1,7 @@
 :root {
     --uiFont: 'Secular One', sans-serif;
     --openSans: 'Open Sans', sans-serif;
+    --disabled: #d1d5db;
 
 }
 
@@ -130,4 +131,28 @@ html, body {
 
 .shipBlock {
     background-color: black;
+}
+
+.destroyerContainer {
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:3px;
+}
+
+#shipInventoryDiv {
+    display: flex;
+    border: 1px solid black;
+}
+
+.disabledBtn:disabled {
+    background-color: var(--disabled);
+    
+}
+
+.dragging {
+    display:none;
+}
+
+.drag-over {
+    border: dashed 3px red;
 }
