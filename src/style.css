@@ -15,6 +15,11 @@ html, body {
     height:100%
 }
 
+
+.hidden {
+    visibility: hidden;
+}
+
 .topUi {
     display: flex;
     height: 100%;
@@ -134,12 +139,52 @@ html, body {
 }
 
 .destroyerContainer {
-    display:grid;
+    
+}
+
+.submarineContainer, .cruiserContainer {
+    
+}
+
+.horizontal.destroyerContainer {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap:3px;
+    gap: 3px;
+}
+
+.horizontal.battleshipContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3px;
+}
+
+.horizontal.submarineContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+}
+
+.horizontal.cruiserContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+}
+.horizontal.carrierContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 3px;
+}
+
+.vertical {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 3px;
 }
 
 #shipInventoryDiv {
+    padding: 5px;
+    gap: 20px;
+    width: 800px;
     display: flex;
     border: 1px solid black;
 }

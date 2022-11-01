@@ -60,10 +60,12 @@ const displayScoreBoard = () => {
     arrowImg.setAttribute('src', './svgs/right_arrow.svg')
     arrowDiv1.appendChild(arrowImg)
 
+    arrowDiv1.classList.add('hidden')
+
     const turnTxtDiv = document.createElement('div')
     const turnTxt = document.createElement('p')
     turnTxt.classList.add('uiTxt')
-    turnTxt.textContent = `${currentTurn}'s turn`
+    turnTxt.textContent = `Place your ships`
     turnTxtDiv.appendChild(turnTxt)
 
     const arrowDiv2 = document.createElement('div')
@@ -100,28 +102,30 @@ const createGame = () => {
     displayBoards(p2Board)
     placeShipUi()
 
-    //p1ships
-    let smallShip1 = Ship(2) 
-    let smallShip2 = Ship(2)
+    // //p1ships
+    // let smallShip1 = Ship(2) 
+    // let smallShip2 = Ship(2)
 
 
     
-    p1Board.placeShip([3, 1], smallShip1)
-    p1Board.placeShip([3, 2], smallShip1)
+    // p1Board.placeShip([3, 1], smallShip1)
+    // p1Board.placeShip([3, 2], smallShip1)
 
-    p1Board.placeShip([0, 0], smallShip2)
-    p1Board.placeShip([0, 1], smallShip2)
+    // p1Board.placeShip([0, 0], smallShip2)
+    // p1Board.placeShip([0, 1], smallShip2)
     
     
 
-    //p2ships
+    // //p2ships
 
-    let p2sub1 = Ship(2)
+    // let p2sub1 = Ship(2)
 
-    p2Board.placeShip([0,0], p2sub1)
-    p2Board.placeShip([1,0], p2sub1)
+    // p2Board.placeShip([0,0], p2sub1)
+    // p2Board.placeShip([1,0], p2sub1)
     
 }
+
+
 
 
 export {startGame}
