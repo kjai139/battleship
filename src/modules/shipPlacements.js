@@ -1,4 +1,6 @@
-import { p1Board, p1Destroyer, p1Battleship, p1Carrier, p1Submarine, p1Cruiser } from "./global"
+import { checkReady } from "./checkReady"
+import { disableBoard, enableBoard } from "./gameFunctions"
+import { p1Board, p1Destroyer, p1Battleship, p1Carrier, p1Submarine, p1Cruiser} from "./global"
 
 const placeShipUi = () => {
     const shipUiDiv = document.createElement('div')
@@ -261,10 +263,16 @@ const dragStart = (e) => {
     let shipType = e.target.id.split('-')[0]
     console.log('dragstart', shipType)
     e.dataTransfer.setData('text/plain', shipType)
+
+    let playerBoard = document.querySelector('#playerBoard')
+    enableBoard(playerBoard)
 }
 
 const dragEnd = (e) => {
+    
     e.target.classList.remove('dragging')
+    let playerBoard = document.querySelector('#playerBoard')
+    disableBoard(playerBoard)
 }
 
 //drop target
@@ -289,6 +297,7 @@ const drop = (e) => {
     let firstCord = e.target.id.split('-')[1]
     let secondCord = e.target.id.split('-')[2]
     let cords = [firstCord, secondCord]
+    
     console.log('cords', cords)
     console.log('dropped', shipType, 'at', e.target.id)
     if (shipType == 'destroyer') {
@@ -325,6 +334,9 @@ const drop = (e) => {
             p1Carrier.placed = true
         }
     }
+    checkReady()
+    let playerBoard = document.querySelector('#playerBoard')
+    disableBoard(playerBoard)
 }
 
 export {placeShipUi}

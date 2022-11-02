@@ -1,5 +1,5 @@
 import { Gameboard } from "./gameboard"
-import { dealDmg } from "./gameFunctions"
+import { dealDmg, disableBoard } from "./gameFunctions"
 import { currentTurn } from "./global"
 import { Ship } from "./shipfactory"
 import { placeShipUi } from "./shipPlacements"
@@ -56,10 +56,10 @@ const displayScoreBoard = () => {
 
     const arrowDiv1 = document.createElement('div')
     const arrowImg = document.createElement('img')
-    arrowImg.setAttribute('id', 'playerArrow')
+    arrowDiv1.setAttribute('id', 'playerArrow')
     arrowImg.setAttribute('src', './svgs/right_arrow.svg')
     arrowDiv1.appendChild(arrowImg)
-
+    
     arrowDiv1.classList.add('hidden')
 
     const turnTxtDiv = document.createElement('div')
@@ -70,7 +70,7 @@ const displayScoreBoard = () => {
 
     const arrowDiv2 = document.createElement('div')
     const arrowImg2 = document.createElement('img')
-    arrowImg2.setAttribute('id', 'npcArrow')
+    arrowDiv2.setAttribute('id', 'npcArrow')
     arrowImg2.setAttribute('src', './svgs/left_arrow.svg')
     arrowDiv2.appendChild(arrowImg2)
 
@@ -102,26 +102,12 @@ const createGame = () => {
     displayBoards(p2Board)
     placeShipUi()
 
-    // //p1ships
-    // let smallShip1 = Ship(2) 
-    // let smallShip2 = Ship(2)
+    let playerBoard = document.querySelector('#playerBoard')
+    let player2Board = document.querySelector('#npcBoard')
 
+    disableBoard(playerBoard)
+    disableBoard(player2Board)
 
-    
-    // p1Board.placeShip([3, 1], smallShip1)
-    // p1Board.placeShip([3, 2], smallShip1)
-
-    // p1Board.placeShip([0, 0], smallShip2)
-    // p1Board.placeShip([0, 1], smallShip2)
-    
-    
-
-    // //p2ships
-
-    // let p2sub1 = Ship(2)
-
-    // p2Board.placeShip([0,0], p2sub1)
-    // p2Board.placeShip([1,0], p2sub1)
     
 }
 

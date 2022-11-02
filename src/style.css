@@ -2,7 +2,7 @@
     --uiFont: 'Secular One', sans-serif;
     --openSans: 'Open Sans', sans-serif;
     --disabled: #d1d5db;
-
+    --hover: #99f6e4;
 }
 
 * {
@@ -200,4 +200,22 @@ html, body {
 
 .drag-over {
     border: dashed 3px red;
+}
+
+#readyBtn {
+    padding: 5px;
+    background-color: white;
+    border-radius: 7px;
+    border: 2px solid black;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#readyBtn:hover {
+    background-color: var(--hover);
+    cursor: pointer;
+
+}
+
+.disabledBoard {
+    pointer-events: none;
 }

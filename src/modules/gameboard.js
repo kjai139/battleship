@@ -67,10 +67,38 @@ const shipDisplay = (board, cords ) => {
 const calculateCords = (board, startcords, length, pos = 'h') => {
     let arr = []
     let add = 0
-    console.log(board[startcords[0]][startcords[1]], 'ccord board', startcords)
-    if (board[startcords[0]][startcords[1]] == 0) {
-        console.log('pos/room', pos, Number(startcords[0]) + length )
-        if (pos == 'h' && Number(startcords[0]) + length <= 10) {
+    let endCord = Number(startcords[0]) + length -1
+
+
+    //check horizontal between cords
+    let checkBetweenCordsH = (board, startcords, endCord) => {
+        let start = Number(startcords[0])
+        let end = Number(endCord)
+        let diff = end - start
+        let passed = 1
+    
+        for (let x = 1; x < diff; x ++) {
+            if (board[start + x][startcords[1]] == 0){
+                passed += 1
+            } 
+        }
+        console.log('num of pass:', passed, 'diff:', diff)
+        if (passed == diff) {
+            
+            return true
+        } else {
+            return false
+        }
+    }
+
+    
+    // console.log(board[startcords[0]][startcords[1]], 'ccord board', startcords)
+
+    if (board[startcords[0]][startcords[1]] == 0 && pos == 'h' && Number(startcords[0]) + length <= 10) {
+
+        // console.log('pos/room', pos, Number(startcords[0]) + length, board[endCord][startcords[1]])
+
+        if (board[endCord][startcords[1]] == 0 && checkBetweenCordsH(board, startcords, endCord)) {
             for (let i = 0; length > i; length--){
                 arr.push([[Number(startcords[0]) + add],[startcords[1]]])
                 add += 1
@@ -87,6 +115,8 @@ const calculateCords = (board, startcords, length, pos = 'h') => {
         return false
     }
 }
+
+
 
 
 export { Gameboard }

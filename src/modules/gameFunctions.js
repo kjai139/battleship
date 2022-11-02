@@ -18,6 +18,14 @@ const getCords = (event) => {
     
 }
 
+const disableBoard = (board) => {
+    board.classList.add('disabledBoard')
+}
+
+const enableBoard = (board) => {
+    board.classList.remove('disabledBoard')
+}
 
 
-export {dealDmg}
+
+export {dealDmg, disableBoard, enableBoard}
