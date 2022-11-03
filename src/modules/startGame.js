@@ -1,9 +1,10 @@
 import { Gameboard } from "./gameboard"
 import { dealDmg, disableBoard } from "./gameFunctions"
-import { currentTurn } from "./global"
+import { currentTurn, player2, player1 } from "./global"
 import { Ship } from "./shipfactory"
 import { placeShipUi } from "./shipPlacements"
 import { p1Board, p2Board } from "./global"
+import { startTurn } from "./runGame"
 
 const startGame = () => {
     let screenDiv = document.querySelector('#screenDiv')
@@ -31,11 +32,37 @@ const displayBoards = (board) => {
             blocks.classList.add('boardBlocks')
             blocks.classList.add('unchecked')
             blocks.setAttribute('id', `${board.name}-${i}-${rows}`)
-
-            blocks.addEventListener('click', () => {
+            if (board.name == 'npcBoard') {
+                blocks.addEventListener('click', () => {
                 
-                dealDmg(board, blocks)
-            })
+                    if (dealDmg(board, blocks)) {
+                        player1.prevHit = true
+                        player1.lastMove = [i, rows]
+                        console.log('prev hit',player1.lastMove, player1.prevHit)
+                    } else {
+                        player1.prevHit = false
+                        player1.lastMove = ''
+                        console.log('prev miss', player1.lastMove, player1.prevHit)
+                    }
+                    startTurn(player2)
+                })
+
+            } else if (board.name == 'playerBoard') {
+                blocks.addEventListener('click', () => {
+                
+                    if (dealDmg(board, blocks)) {
+                        player2.prevHit = true
+                        player2.lastMove = blocks.id
+                        console.log('prev hit',player2.lastMove, player2.prevHit)
+                    } else {
+                        player2.prevHit = false
+                        player2.lastMove = ''
+                        console.log('prev miss', player2.lastMove, player2.prevHit)
+                    }
+                    startTurn(player1)
+                })
+            }
+            
 
             boardContainer.appendChild(blocks)
 

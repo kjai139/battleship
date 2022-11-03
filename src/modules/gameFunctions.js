@@ -3,10 +3,12 @@ const dealDmg = (board, blocks) => {
         blocks.classList.remove('unchecked')
         blocks.classList.add('markHit')
         blocks.disabled = true
+        return true
     } else {
         blocks.classList.remove('unchecked')
         blocks.classList.add('markMiss')
         blocks.disabled = true
+        return false
     }
 }
 

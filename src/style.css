@@ -29,6 +29,8 @@ html, body {
 
 .uiTxt {
     font-family: var(--uiFont);
+    display: flex;
+    text-align: center;
 }
 
 #startDiv {
@@ -110,6 +112,7 @@ html, body {
 }
 
 #scoreDiv {
+    width: 226px;
     display:flex;
     flex-direction: column;
     justify-content: center;

@@ -1,6 +1,6 @@
-import { enableBoard } from "./gameFunctions"
+import { disableBoard, enableBoard } from "./gameFunctions"
 import { p1Board, p2Board, currentTurn, player1 } from "./global"
-
+import {npcMove} from "./npcAi"
 
 const runGame = (p1, p2) => {
     let uiTxt = document.querySelector('.uiTxt')
@@ -19,9 +19,11 @@ const runGame = (p1, p2) => {
 
 const startTurn = (curTurn) => {
     let uiTxt = document.querySelector('.uiTxt')
+    // console.log(curTurn.type, 'curturn type')
     
 
     let p2B = document.querySelector('#npcBoard')
+    let p1B = document.querySelector('#playerBoard')
     let rightArrow = document.querySelector('#playerArrow')
     let leftArrow = document.querySelector('#npcArrow')
     
@@ -34,9 +36,20 @@ const startTurn = (curTurn) => {
         
     } else if (curTurn.name == 'p2') {
         if (curTurn.type == 'npc') {
+            console.log('npc script')
+            rightArrow.classList.add('hidden')
+            leftArrow.classList.remove('hidden')
+        
+            uiTxt.textContent = `NPC's Turn to attack`
+            disableBoard(p2B)
+            enableBoard(p1B)
+
+            npcMove(curTurn)
+
+        } else {
 
         }
     }
 }
 
-export {runGame}
+export {runGame, startTurn}

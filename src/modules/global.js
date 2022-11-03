@@ -6,6 +6,7 @@ let currentTurn
 
 let player1 = new Players('p1')
 let player2 = new Players('p2')
+player2.type = 'npc'
 
 let p1Board = Gameboard('playerBoard')
 let p2Board = Gameboard('npcBoard')
