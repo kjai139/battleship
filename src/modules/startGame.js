@@ -1,5 +1,5 @@
 import { Gameboard } from "./gameboard"
-import { dealDmg, disableBoard } from "./gameFunctions"
+import { checkWinner, createOverlay, dealDmg, disableBoard } from "./gameFunctions"
 import { currentTurn, player2, player1 } from "./global"
 import { Ship } from "./shipfactory"
 import { placeShipUi } from "./shipPlacements"
@@ -39,6 +39,7 @@ const displayBoards = (board) => {
                         player1.prevHit = true
                         player1.lastMove = [i, rows]
                         console.log('prev hit',player1.lastMove, player1.prevHit)
+                        checkWinner(player1)
                     } else {
                         player1.prevHit = false
                         player1.lastMove = ''
@@ -54,6 +55,7 @@ const displayBoards = (board) => {
                         player2.prevHit = true
                         player2.lastMove = blocks.id
                         console.log('prev hit',player2.lastMove, player2.prevHit)
+                        checkWinner(player2)
                     } else {
                         player2.prevHit = false
                         player2.lastMove = ''
@@ -135,6 +137,7 @@ const createGame = () => {
     disableBoard(playerBoard)
     disableBoard(player2Board)
 
+    
     
 }
 

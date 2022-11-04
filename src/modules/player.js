@@ -4,6 +4,7 @@ class Players {
         this.type = type
         this.prevHit = false
         this.lastMove = ''
+        this.board = ''
     }
 
     
