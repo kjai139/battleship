@@ -98,6 +98,7 @@ const placeDestroyer = () => {
 
     const shipInventoryDiv = document.querySelector('#shipInventoryDiv')
 
+    destroyerContainer.addEventListener('click', () => shipPositionToggle(p1Destroyer, destroyerContainer))
     destroyerContainer.addEventListener('dragstart', dragStart)
     destroyerContainer.addEventListener('dragend', dragEnd)
     shipInventoryDiv.appendChild(destroyerContainer)
@@ -114,8 +115,9 @@ const placeSubmarine = () => {
     submarineContainer.setAttribute('draggable', 'true')
     submarineContainer.setAttribute('id', 'submarine-h')
 
+    p1Submarine.position = 'v'
     submarineContainer.classList.add('submarineContainer')
-    submarineContainer.classList.add('horizontal')
+    submarineContainer.classList.add('vertical')
     let submarine1 = document.createElement('div')
     let submarine2 = document.createElement('div')
     let submarine3 = document.createElement('div')
@@ -132,6 +134,7 @@ const placeSubmarine = () => {
 
     const shipInventoryDiv = document.querySelector('#shipInventoryDiv')
 
+    submarineContainer.addEventListener('click', () => shipPositionToggle(p1Submarine, submarineContainer))
     submarineContainer.addEventListener('dragstart', dragStart)
     submarineContainer.addEventListener('dragend', dragEnd)
     shipInventoryDiv.appendChild(submarineContainer)
@@ -166,6 +169,7 @@ const placeCruiser = () => {
 
     const shipInventoryDiv = document.querySelector('#shipInventoryDiv')
 
+    cruiserContainer.addEventListener('click', () => shipPositionToggle(p1Cruiser, cruiserContainer))
     cruiserContainer.addEventListener('dragstart', dragStart)
     cruiserContainer.addEventListener('dragend', dragEnd)
     shipInventoryDiv.appendChild(cruiserContainer)
@@ -203,6 +207,7 @@ const placeBattleship = () => {
 
     const shipInventoryDiv = document.querySelector('#shipInventoryDiv')
 
+    battleshipContainer.addEventListener('click', () => shipPositionToggle(p1Battleship, battleshipContainer))
     battleshipContainer.addEventListener('dragstart', dragStart)
     battleshipContainer.addEventListener('dragend', dragEnd)
     shipInventoryDiv.appendChild(battleshipContainer)
@@ -244,6 +249,7 @@ const placeCarrier = () => {
 
     const shipInventoryDiv = document.querySelector('#shipInventoryDiv')
 
+    carrierContainer.addEventListener('click', () => shipPositionToggle(p1Carrier, carrierContainer))
     carrierContainer.addEventListener('dragstart', dragStart)
     carrierContainer.addEventListener('dragend', dragEnd)
     shipInventoryDiv.appendChild(carrierContainer)
@@ -337,6 +343,20 @@ const drop = (e) => {
     checkReady()
     let playerBoard = document.querySelector('#playerBoard')
     disableBoard(playerBoard)
+}
+
+const shipPositionToggle = (ship, element) => {
+    
+    if (ship.position == 'h') {
+        ship.position = 'v'
+        element.classList.remove('horizontal')
+        element.classList.add('vertical')
+    } else if (ship.position == 'v') {
+        ship.position = 'h'
+        element.classList.remove('vertical')
+        element.classList.add('horizontal')
+    }
+    console.log('current ship pos', ship.position)
 }
 
 export {placeShipUi}

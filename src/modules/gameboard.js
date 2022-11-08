@@ -17,9 +17,13 @@ function Gameboard(name = '') {
         
     }
 
-    board.placeShip = (cords, ship, position = 'h') => {
+    board.placeShip = (cords, ship) => {
         console.log('shiplength', ship.length, ship.position)
-        let cordArr = calculateCords(board.board, cords, ship.length)
+        
+        let cordArr = calculateCords(board.board, cords, ship.length, ship.position)
+       
+        
+        console.log('cordArr check', cordArr)
 
         if (cordArr){
             cordArr.forEach(cz => {
@@ -68,6 +72,7 @@ const calculateCords = (board, startcords, length, pos = 'h') => {
     let arr = []
     let add = 0
     let endCord = Number(startcords[0]) + length -1
+    let endCordV = Number(startcords[1]) + length - 1
 
 
     //check horizontal between cords
@@ -79,6 +84,30 @@ const calculateCords = (board, startcords, length, pos = 'h') => {
     
         for (let x = 1; x < diff; x ++) {
             if (board[start + x][startcords[1]] == 0){
+                passed += 1
+            } 
+        }
+        console.log('num of pass:', passed, 'diff:', diff)
+        if (passed == diff) {
+            
+            return true
+        } else {
+            return false
+        }
+    }
+
+    //vertical
+    let checkBetweenCordsV = (board, startcords, endCordV) => {
+        let start = Number(startcords[0])
+        let startcordsV = Number(startcords[1])
+        let end = Number(endCordV)
+
+        console.log('endV', end, 'start', startcordsV)
+        let diff = end - startcordsV
+        let passed = 1
+    
+        for (let x = 1; x < diff; x ++) {
+            if (board[start][startcordsV + x] == 0){
                 passed += 1
             } 
         }
@@ -104,6 +133,20 @@ const calculateCords = (board, startcords, length, pos = 'h') => {
                 add += 1
             }
             console.log('cCords', arr)
+            return arr
+        } else {
+            
+            console.log('not enuf room')
+            return false
+        }
+        //vertical
+    } else if (board[startcords[0]][startcords[1]] == 0 && pos == 'v' && Number(startcords[1]) + length <= 10) {
+        if (board[startcords[0]][endCordV] == 0 && checkBetweenCordsV(board, startcords, endCordV)) {
+            for (let i = 0; length > i; length--){
+                arr.push([[startcords[0]],[Number(startcords[1]) + add]])
+                add += 1
+            }
+            console.log('cCordsV', arr)
             return arr
         } else {
             

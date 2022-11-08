@@ -197,6 +197,7 @@ html, body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 3px;
+    align-self: flex-start;
 }
 
 .horizontal.battleshipContainer {
@@ -204,6 +205,7 @@ html, body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 3px;
+    align-self: flex-start;
 }
 
 .horizontal.submarineContainer {
@@ -211,6 +213,7 @@ html, body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 3px;
+    align-self: flex-start;
 }
 
 .horizontal.cruiserContainer {
@@ -218,19 +221,23 @@ html, body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 3px;
+    align-self: flex-start;
 }
+.vertical {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 3px;
+    align-self: flex-start;
+}
+
 .horizontal.carrierContainer {
     cursor: grabbing;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 3px;
+    align-self: flex-start;
 }
 
-.vertical {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 3px;
-}
 
 #shipInventoryDiv {
     padding: 5px;

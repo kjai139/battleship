@@ -1,6 +1,6 @@
 import { disableBoard, enableBoard } from "./gameFunctions"
 import { p1Board, p2Board, currentTurn, player1 } from "./global"
-import {npcMove} from "./npcAi"
+import {npcMove, npcPlaceShips} from "./npcAi"
 
 const runGame = (p1, p2) => {
     let uiTxt = document.querySelector('.uiTxt')
@@ -12,7 +12,7 @@ const runGame = (p1, p2) => {
     let rdyBtn = document.querySelector('#readyBtn')
 
     rdyBtn.classList.add('hidden')
-
+    
     startTurn(player1)
     
 }

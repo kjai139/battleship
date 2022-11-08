@@ -5,6 +5,7 @@ import { Ship } from "./shipfactory"
 import { placeShipUi } from "./shipPlacements"
 import { p1Board, p2Board } from "./global"
 import { startTurn } from "./runGame"
+import { npcPlaceShips } from "./npcAi"
 
 const startGame = () => {
     let screenDiv = document.querySelector('#screenDiv')
@@ -137,7 +138,9 @@ const createGame = () => {
     disableBoard(playerBoard)
     disableBoard(player2Board)
 
-    
+
+    //testing placeships
+    npcPlaceShips()
     
 }
 

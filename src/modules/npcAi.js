@@ -1,3 +1,5 @@
+import { p2Battleship, p2Board, p2Carrier, p2Destroyer, p2Submarine, p2Cruiser } from "./global"
+
 const npcMove = (player) => {
     let randomCords = chooseRandom()
     
@@ -93,4 +95,100 @@ const checkIfValidMove = (move) => {
 
 }
 
-export {npcMove}
+
+//npc ship placements
+
+const npcPlaceShips = () => {
+    npcPlaceDestroyer()
+    npcPlaceSubmarine()
+    npcPlaceCruiser()
+    npcPlaceBattleship()
+    npcPlaceCarrier()
+}
+
+
+const npcPlaceDestroyer = () => {
+    let randomCords = chooseRandom()
+    let randomDirection = Math.floor(Math.random() * 2)
+
+    if (randomDirection == 1) {
+        p2Destroyer.position = 'v'
+    } else if (randomDirection == 0) {
+        p2Destroyer.position = 'h'
+    }
+
+    if (p2Board.placeShip(randomCords, p2Destroyer) == false) {
+        console.log('falty placement npc destroyer')
+        return npcPlaceDestroyer()
+    }
+
+}
+const npcPlaceSubmarine = () => {
+    let randomCords = chooseRandom()
+    let randomDirection = Math.floor(Math.random() * 2)
+
+    if (randomDirection == 1) {
+        p2Submarine.position = 'v'
+    } else if (randomDirection == 0) {
+        p2Submarine.position = 'h'
+    }
+
+    if (p2Board.placeShip(randomCords, p2Submarine) == false) {
+        console.log('falty placement npc sub')
+        return npcPlaceSubmarine()
+    }
+
+}
+
+const npcPlaceCruiser = () => {
+    let randomCords = chooseRandom()
+    let randomDirection = Math.floor(Math.random() * 2)
+
+    if (randomDirection == 1) {
+        p2Cruiser.position = 'v'
+    } else if (randomDirection == 0) {
+        p2Cruiser.position = 'h'
+    }
+
+    if (p2Board.placeShip(randomCords, p2Cruiser) == false) {
+        console.log('falty placement npc cruiser')
+        return npcPlaceCruiser()
+    }
+
+}
+
+const npcPlaceBattleship = () => {
+    let randomCords = chooseRandom()
+    let randomDirection = Math.floor(Math.random() * 2)
+
+    if (randomDirection == 1) {
+        p2Battleship.position = 'v'
+    } else if (randomDirection == 0) {
+        p2Battleship.position = 'h'
+    }
+
+    if (p2Board.placeShip(randomCords, p2Battleship) == false) {
+        console.log('falty placement npc battleship')
+        return npcPlaceBattleship()
+    }
+
+}
+
+const npcPlaceCarrier = () => {
+    let randomCords = chooseRandom()
+    let randomDirection = Math.floor(Math.random() * 2)
+
+    if (randomDirection == 1) {
+        p2Carrier.position = 'v'
+    } else if (randomDirection == 0) {
+        p2Carrier.position = 'h'
+    }
+
+    if (p2Board.placeShip(randomCords, p2Carrier) == false) {
+        console.log('falty placement npc carrier')
+        return npcPlaceCarrier()
+    }
+
+}
+
+export {npcMove, npcPlaceShips}
