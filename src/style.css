@@ -58,6 +58,10 @@ html, body {
     visibility: hidden;
 }
 
+.masked {
+    background-color: gainsboro !important;
+}
+
 .topUi {
     display: flex;
     height: 100%;
@@ -65,7 +69,8 @@ html, body {
     align-items: center;
 }
 
-.uiTxt {
+.uiTxt, .gameTxt, .gameTxt2 {
+    justify-content: center;
     font-family: var(--uiFont);
     display: flex;
     text-align: center;

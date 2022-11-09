@@ -64,6 +64,7 @@ const placeShipUi = () => {
 
     const shipInventoryDiv = document.createElement('div')
     shipInventoryDiv.setAttribute('id', 'shipInventoryDiv')
+    shipInventoryDiv.classList.add('hidden')
     screenDiv.appendChild(shipInventoryDiv)
 
     //playerboard
@@ -97,6 +98,7 @@ const placeDestroyer = () => {
     destroyerContainer.appendChild(destroyer2)
 
     const shipInventoryDiv = document.querySelector('#shipInventoryDiv')
+    shipInventoryDiv.classList.remove('hidden')
 
     destroyerContainer.addEventListener('click', () => shipPositionToggle(p1Destroyer, destroyerContainer))
     destroyerContainer.addEventListener('dragstart', dragStart)
@@ -133,6 +135,7 @@ const placeSubmarine = () => {
     submarineContainer.appendChild(submarine3)
 
     const shipInventoryDiv = document.querySelector('#shipInventoryDiv')
+    shipInventoryDiv.classList.remove('hidden')
 
     submarineContainer.addEventListener('click', () => shipPositionToggle(p1Submarine, submarineContainer))
     submarineContainer.addEventListener('dragstart', dragStart)
@@ -168,6 +171,7 @@ const placeCruiser = () => {
     cruiserContainer.appendChild(cruiser3)
 
     const shipInventoryDiv = document.querySelector('#shipInventoryDiv')
+    shipInventoryDiv.classList.remove('hidden')
 
     cruiserContainer.addEventListener('click', () => shipPositionToggle(p1Cruiser, cruiserContainer))
     cruiserContainer.addEventListener('dragstart', dragStart)
@@ -206,6 +210,7 @@ const placeBattleship = () => {
     battleshipContainer.appendChild(battleship4)
 
     const shipInventoryDiv = document.querySelector('#shipInventoryDiv')
+    shipInventoryDiv.classList.remove('hidden')
 
     battleshipContainer.addEventListener('click', () => shipPositionToggle(p1Battleship, battleshipContainer))
     battleshipContainer.addEventListener('dragstart', dragStart)
@@ -248,6 +253,7 @@ const placeCarrier = () => {
     carrierContainer.appendChild(carrier5)
 
     const shipInventoryDiv = document.querySelector('#shipInventoryDiv')
+    shipInventoryDiv.classList.remove('hidden')
 
     carrierContainer.addEventListener('click', () => shipPositionToggle(p1Carrier, carrierContainer))
     carrierContainer.addEventListener('dragstart', dragStart)

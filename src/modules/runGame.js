@@ -1,4 +1,4 @@
-import { disableBoard, enableBoard } from "./gameFunctions"
+import { disableBoard, enableBoard, hideTxt, resetTxt, showTxt } from "./gameFunctions"
 import { p1Board, p2Board, currentTurn, player1 } from "./global"
 import {npcMove, npcPlaceShips} from "./npcAi"
 
@@ -29,22 +29,39 @@ const startTurn = (curTurn) => {
     
 
     if (curTurn.name == 'p1') {
-        rightArrow.classList.remove('hidden')
-        leftArrow.classList.add('hidden')
-        uiTxt.textContent = `Player 1's Turn to attack`
+        
+        disableBoard(p1B)
+        setTimeout( () => {
+            rightArrow.classList.remove('hidden')
+            leftArrow.classList.add('hidden')
+            uiTxt.textContent = `Player 1's Turn to attack`
+            resetTxt()
+        }, 1000)
         enableBoard(p2B)
+        
+        
         
     } else if (curTurn.name == 'p2') {
         if (curTurn.type == 'npc') {
             console.log('npc script')
-            rightArrow.classList.add('hidden')
-            leftArrow.classList.remove('hidden')
-        
-            uiTxt.textContent = `NPC's Turn to attack`
+            
             disableBoard(p2B)
-            enableBoard(p1B)
+            
+            setTimeout( () => {
+                rightArrow.classList.add('hidden')
+                leftArrow.classList.remove('hidden')
+            
+                uiTxt.textContent = `NPC's Turn to attack`
+                
+                resetTxt()
+                
+                setTimeout( () => {
+                    enableBoard(p1B)
+                    npcMove(curTurn)
+                }, 1000)
 
-            npcMove(curTurn)
+            }, 1000)
+            
 
         } else {
 

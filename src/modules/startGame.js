@@ -25,6 +25,8 @@ const displayBoards = (board) => {
     let boardContainer = document.createElement('div')
     boardContainer.classList.add('boardContainer')
     boardContainer.setAttribute('id', `${board.name}`)
+    
+    
     let x = 10
     let rows = 0
     while (rows < 10) {
@@ -34,19 +36,36 @@ const displayBoards = (board) => {
             blocks.classList.add('unchecked')
             blocks.setAttribute('id', `${board.name}-${i}-${rows}`)
             if (board.name == 'npcBoard') {
+                blocks.classList.add('masked')
                 blocks.addEventListener('click', () => {
-                
+                    blocks.classList.remove('masked')
                     if (dealDmg(board, blocks)) {
                         player1.prevHit = true
                         player1.lastMove = [i, rows]
                         console.log('prev hit',player1.lastMove, player1.prevHit)
-                        checkWinner(player1)
+
+
+                        getGameTxt(blocks)
+
+                        setTimeout( () => {
+                            if (checkWinner(player1) == false) {
+                                setTimeout( () => {
+                                    startTurn(player2)
+                                },1000)
+                            }
+
+                        }, 1000)
+
+                        
                     } else {
+                        
                         player1.prevHit = false
                         player1.lastMove = ''
                         console.log('prev miss', player1.lastMove, player1.prevHit)
+                        getMissTxt()
+                        startTurn(player2)
                     }
-                    startTurn(player2)
+                    
                 })
 
             } else if (board.name == 'playerBoard') {
@@ -56,13 +75,23 @@ const displayBoards = (board) => {
                         player2.prevHit = true
                         player2.lastMove = blocks.id
                         console.log('prev hit',player2.lastMove, player2.prevHit)
-                        checkWinner(player2)
+
+                        setTimeout( () => {
+                            if (checkWinner(player2) == false ) {
+                                setTimeout( () => {
+                                    startTurn(player1)
+                                },1000)
+                                
+                            }
+                        }, 1000)
+                        
                     } else {
                         player2.prevHit = false
                         player2.lastMove = ''
                         console.log('prev miss', player2.lastMove, player2.prevHit)
+                        startTurn(player1)
                     }
-                    startTurn(player1)
+                    
                 })
             }
             
@@ -77,6 +106,21 @@ const displayBoards = (board) => {
     }
     gameBoardDiv.appendChild(boardContainer)
     
+}
+
+const getGameTxt = (blocks) => {
+    let gameTxt = document.querySelector('.gameTxt')
+    let cords = blocks.id.split('-')
+    let boardCords = [Number(cords[1]),Number(cords[2])]
+
+    let ship = p2Board.board[boardCords[0]][boardCords[1]]
+    console.log('ship', ship)
+    gameTxt.textContent = `NPC's ${ship.name} has been hit!`
+}
+
+const getMissTxt = () => {
+    let gameTxt = document.querySelector('.gameTxt')
+    gameTxt.textContent = `Attack missed`
 }
 
 const displayScoreBoard = () => {
@@ -104,9 +148,23 @@ const displayScoreBoard = () => {
     arrowImg2.setAttribute('src', './svgs/left_arrow.svg')
     arrowDiv2.appendChild(arrowImg2)
 
+
+    const msgDiv = document.createElement('div')
+    msgDiv.setAttribute('id', '#msgDiv')
+    const gameTxt = document.createElement('p')
+    gameTxt.classList.add('gameTxt')
+    gameTxt.textContent = ''
+
+    
+    const gameTxt2 = document.createElement('p')
+    gameTxt2.classList.add('gameTxt2')
+    msgDiv.appendChild(gameTxt)
+    msgDiv.appendChild(gameTxt2)
+
     scoreDiv.appendChild(arrowDiv1)
     scoreDiv.appendChild(turnTxtDiv)
     scoreDiv.appendChild(arrowDiv2)
+    scoreDiv.appendChild(msgDiv)
 
     gameBoardDiv.appendChild(scoreDiv)
 

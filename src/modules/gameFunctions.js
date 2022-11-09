@@ -2,12 +2,18 @@ import { p2Battleship, p2Carrier, p2Cruiser, p2Destroyer, p2Submarine, p1Submari
 import { startGame } from "./startGame"
 
 const dealDmg = (board, blocks) => {
+    let missSound = new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg')
+
+    let hitSound = new Audio('https://actions.google.com/sounds/v1/weapons/big_explosion_distant.ogg')
+
     if (board.receiveAttack(getCords(blocks)) == true) {
+        hitSound.play()
         blocks.classList.remove('unchecked')
         blocks.classList.add('markHit')
         blocks.disabled = true
         return true
     } else {
+        missSound.play()
         blocks.classList.remove('unchecked')
         blocks.classList.add('markMiss')
         blocks.disabled = true
@@ -31,21 +37,47 @@ const enableBoard = (board) => {
     board.classList.remove('disabledBoard')
 }
 
+const hideTxt = () => {
+    let gameTxt2 = document.querySelector('.gameTxt2')
+    gameTxt2.classList.add('hidden')
+}
+
+const showTxt = () => {
+    let gameTxt2 = document.querySelector('.gameTxt2')
+    gameTxt2.classList.remove('hidden')
+}
+
+const resetTxt = () => {
+    let gameTxt = document.querySelector('.gameTxt')
+    let gameTxt2 = document.querySelector('.gameTxt2')
+    gameTxt2.textContent = ''
+    gameTxt.textContent = ''
+}
+
 const checkWinner = (player) => {
+    
     if (player.board == 'left') {
         if (p2Submarine.sunk == true && p2Carrier.sunk == true && p2Battleship.sunk == true && p2Cruiser.sunk == true && p2Destroyer.sunk == true) {
             console.log(`${player.name} wins!`)
             createOverlay(player.name)
+            return true
+        } else {
+            return false
         }
     } else if (player.board == 'right') {
         if (p1Submarine.sunk == true && p1Carrier.sunk == true && p1Battleship.sunk == true && p1Cruiser.sunk == true && p1Destroyer.sunk == true) {
             console.log(`${player.name} wins!`)
             createOverlay(player.name)
+            return true
+        } else {
+            return false
         }
-    }
+    } 
 }
 
 const createOverlay = (winner) => {
+    let winnerAudio = new Audio('https://actions.google.com/sounds/v1/crowds/battle_crowd_celebration.ogg')
+
     let overlayDiv = document.createElement('div')
     overlayDiv.classList.add('overlay')
 
@@ -66,11 +98,16 @@ const createOverlay = (winner) => {
     } else if (winner == 'p2'){
         overlayTxt.textContent = `Winner:Player 2!`
     }
+    winnerAudio.play()
     
     let newGameBtn = document.createElement('button')
     newGameBtn.classList.add('newGameBtn')
     newGameBtn.textContent = 'New game'
-    newGameBtn.addEventListener('click', newGame)
+    newGameBtn.addEventListener('click', () => {
+        winnerAudio.pause()
+        winnerAudio.currentTime = 0
+        newGame()
+    })
 
     overlayBox.appendChild(overlayTxt)
     overlayBox.appendChild(newGameBtn)
@@ -138,4 +175,4 @@ const newGame = () => {
     //
     startGame()
 }
-export {dealDmg, disableBoard, enableBoard, checkWinner, createOverlay}
+export {dealDmg, disableBoard, enableBoard, checkWinner, createOverlay, hideTxt, showTxt, resetTxt}
