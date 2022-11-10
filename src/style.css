@@ -172,6 +172,7 @@ html, body {
 
 .shipBtns:hover:not(:disabled) {
     cursor: pointer;
+    box-shadow:none;
 }
 
 .shipBtns {
